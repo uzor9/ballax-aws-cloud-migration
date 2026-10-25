@@ -104,7 +104,6 @@ Implemented several security controls:
 - Required SSL for the application database account.
 - Stored database credentials in a restricted environment file on EC2.
 - Used SSH port forwarding for private application access.
-
 **Note:** The demonstration API does not implement end-user authentication and is not intended for public production exposure.
 
 ## Testing and Verification
@@ -112,4 +111,51 @@ Implemented several security controls:
 Successfully verified:
 
 - EC2 connectivity to the RDS MySQL endpoint.
-- Database migration and preservation of the
+
+- Database migration and preservation of the original customer records.
+- Application database access using the restricted database account.
+- Successful HTTP responses through Gunicorn and Nginx.
+- Application accessibility through SSH port forwarding.
+- Successful creation of an additional customer using an HTTP POST request.
+- Persistence of the newly created customer record in RDS.
+- Application service status and request logs using systemd and Nginx.
+
+### Deployment Evidence
+
+**API Health Check**
+
+![Ballax API health check](screenshots/api-health-check.png)
+
+**Customer Database Integration**
+
+![Ballax customer records retrieved from Amazon RDS](screenshots/customer-database-response.png)
+
+## Challenges and Lessons Learned
+
+This project provided practical experience in:
+
+- Designing VPC networking and controlling traffic with security groups.
+- Troubleshooting database connectivity and authentication.
+- Understanding the difference between a development server and an application server.
+- Managing long-running Linux services with systemd.
+- Configuring reverse proxies and local-only network listeners.
+- Securing credentials and applying least-privilege database permissions.
+- Testing a migrated application end to end.
+
+## Future Improvements
+
+Potential improvements include:
+
+- Infrastructure as Code using Terraform.
+- Automated deployment through CI/CD.
+- Application authentication and authorization.
+- HTTPS and a controlled public-facing entry point.
+- Improved application logging and database-aware health checks.
+- Automated database backup and recovery testing.
+
+## Project Scope
+
+Ballax Technologies is a fictional organization used for this educational cloud migration simulation.
+
+The project demonstrates a working AWS deployment and database migration, rather than a production-ready enterprise system.
+
